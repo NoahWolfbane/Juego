@@ -1,0 +1,841 @@
+// ============================================
+// BANCO DE PREGUNTAS - NETWORK EXAM TRAINER
+// ============================================
+
+// ============================================
+// SECCIÓN 1: TEÓRICO (80 preguntas)
+// ============================================
+const preguntasTeorico = [
+  {
+    id: 1,
+    pregunta: "¿Qué significa las siglas LAN?",
+    opciones: ["Larga Area Network", "Local Area Node", "Local Area Network", "Light Access Node", "Local Access Network"],
+    correcta: 2,
+    explicacionBien: "Correcto. LAN significa Local Area Network (Red de Área Local). Se utiliza para conectar dispositivos dentro de una zona geográfica limitada, como una casa, oficina o campus universitario.",
+    explicacionMal: "La respuesta correcta era Local Area Network. Las demás opciones no corresponden a términos oficiales utilizados en redes de computadoras.",
+    concepto: "Una WAN (Wide Area Network) conecta múltiples LAN ubicadas en diferentes lugares geográficos."
+  },
+  {
+    id: 2,
+    pregunta: "¿Cuál es la diferencia principal entre un switch y un router?",
+    opciones: ["El switch opera en Capa 3 y el router en Capa 2", "El switch conecta redes diferentes y el router dispositivos en la misma red", "El switch conecta dispositivos en la misma red local y el router conecta redes diferentes", "El switch es inalámbrico y el router por cable", "El switch enruta paquetes por Internet y el router filtra tráfico"],
+    correcta: 2,
+    explicacionBien: "Correcto. Un switch permite la comunicación entre dispositivos dentro de una misma LAN utilizando direcciones MAC. Un router conecta diferentes redes utilizando direcciones IP.",
+    explicacionMal: "La respuesta correcta era la opción C. El switch conecta equipos dentro de la misma red mientras que el router comunica redes distintas.",
+    concepto: "El switch trabaja principalmente en Capa 2 del modelo OSI y el router en Capa 3."
+  },
+  {
+    id: 3,
+    pregunta: "¿Qué topología de red depende de un dispositivo central, de modo que si este falla, toda la red se cae?",
+    opciones: ["Malla", "Anillo", "Bus", "Estrella", "Híbrida"],
+    correcta: 3,
+    explicacionBien: "Correcto. En una topología estrella todos los dispositivos se conectan a un dispositivo central, normalmente un switch. Si dicho dispositivo falla, todos los equipos pierden comunicación.",
+    explicacionMal: "La respuesta correcta era Estrella. Aunque es una de las topologías más utilizadas actualmente, presenta un punto único de falla en el dispositivo central.",
+    concepto: "La mayoría de las redes Ethernet modernas utilizan topología física de estrella."
+  },
+  {
+    id: 4,
+    pregunta: "¿Qué topología ofrece mayor redundancia y tolerancia a fallos?",
+    opciones: ["Estrella", "Bus", "Anillo", "Malla", "Árbol"],
+    correcta: 3,
+    explicacionBien: "Correcto. La topología de malla proporciona múltiples rutas alternativas entre dispositivos. Si un enlace falla, el tráfico puede utilizar otro camino disponible.",
+    explicacionMal: "La respuesta correcta era Malla. Esta topología destaca por su alta disponibilidad y tolerancia a fallos.",
+    concepto: "Internet utiliza principios similares de redundancia mediante múltiples rutas entre routers."
+  },
+  {
+    id: 5,
+    pregunta: "¿Cuál es la diferencia entre topología física y lógica?",
+    opciones: ["La física es el flujo de datos y la lógica es el cableado", "La física es la disposición tangible de cables/dispositivos y la lógica es cómo fluyen los datos a nivel de protocolo", "No hay diferencia, son sinónimos", "La física aplica a WAN y la lógica a LAN", "La física es inalámbrica y la lógica por cable"],
+    correcta: 1,
+    explicacionBien: "Correcto. La topología física describe cómo están conectados físicamente los dispositivos. La topología lógica describe cómo circulan los datos independientemente de la disposición física.",
+    explicacionMal: "La respuesta correcta era la opción B. Muchas veces una red puede tener una topología física estrella pero una topología lógica diferente.",
+    concepto: "Lo físico representa la infraestructura visible; lo lógico representa el comportamiento de la comunicación."
+  },
+  {
+    id: 6,
+    pregunta: "¿Cuántos bits tiene una dirección IPv4 y cuántos una IPv6?",
+    opciones: ["16 y 32", "32 y 64", "32 y 128", "64 y 128", "128 y 256"],
+    correcta: 2,
+    explicacionBien: "Correcto. IPv4 utiliza direcciones de 32 bits (aprox. 4.300 millones). IPv6 utiliza 128 bits, proporcionando una cantidad prácticamente inagotable de direcciones.",
+    explicacionMal: "La respuesta correcta era 32 y 128. IPv4 fue suficiente durante muchos años, pero el crecimiento de Internet hizo necesaria IPv6.",
+    concepto: "IPv6 elimina muchas limitaciones de IPv4 y reduce la dependencia de NAT."
+  },
+  {
+    id: 7,
+    pregunta: "¿Para qué se utilizan las direcciones IP privadas?",
+    opciones: ["Para comunicarse directamente a través de Internet", "Para identificar servidores web públicos", "Para la comunicación dentro de redes locales (LAN)", "Para enrutar tráfico entre sistemas autónomos", "Para cifrar datos sensibles"],
+    correcta: 2,
+    explicacionBien: "Correcto. Las direcciones IP privadas se utilizan dentro de redes internas y no pueden ser enrutadas directamente por Internet.",
+    explicacionMal: "La respuesta correcta era la opción C. Las IP privadas permiten que múltiples dispositivos se comuniquen internamente sin consumir direcciones públicas.",
+    concepto: "Los rangos privados más comunes son 10.0.0.0/8, 172.16.0.0/12 y 192.168.0.0/16."
+  },
+  {
+    id: 8,
+    pregunta: "¿Qué protocolo de enrutamiento es EGP y se usa para conectar sistemas autónomos en Internet?",
+    opciones: ["OSPF", "EIGRP", "RIP", "BGP", "STP"],
+    correcta: 3,
+    explicacionBien: "Correcto. BGP (Border Gateway Protocol) es el principal protocolo de enrutamiento utilizado en Internet para intercambiar rutas entre sistemas autónomos.",
+    explicacionMal: "La respuesta correcta era BGP. Protocolos como OSPF, RIP y EIGRP funcionan dentro de una organización, mientras que BGP conecta organizaciones completas.",
+    concepto: "BGP es considerado un protocolo EGP (Exterior Gateway Protocol)."
+  },
+  {
+    id: 9,
+    pregunta: "¿Qué dispositivo de red se encarga de filtrar y controlar el tráfico según reglas de seguridad?",
+    opciones: ["Switch", "Hub", "Firewall", "Punto de Acceso", "Repetidor"],
+    correcta: 2,
+    explicacionBien: "Correcto. Un firewall analiza el tráfico de red y aplica reglas para permitir o bloquear conexiones según políticas de seguridad definidas.",
+    explicacionMal: "La respuesta correcta era Firewall. Aunque switches y routers pueden implementar ciertas funciones de seguridad, el firewall está diseñado específicamente para filtrar tráfico.",
+    concepto: "Los firewalls modernos pueden inspeccionar aplicaciones, usuarios y contenido además de IPs y puertos."
+  },
+  {
+    id: 10,
+    pregunta: "¿Qué ventaja principal ofrece la fibra óptica sobre el cableado de cobre?",
+    opciones: ["Es más barata de instalar", "Usa señales eléctricas", "Permite conexiones ultrarrápidas, mayor capacidad y no sufre interferencia electromagnética", "Es más flexible para dobleces cerrados", "No requiere routers para enrutamiento"],
+    correcta: 2,
+    explicacionBien: "Correcto. La fibra óptica transmite información mediante pulsos de luz, permitiendo velocidades muy altas, largas distancias y resistencia a interferencias.",
+    explicacionMal: "La respuesta correcta era la opción C. A diferencia del cobre, la fibra óptica no utiliza señales eléctricas y ofrece un ancho de banda significativamente superior.",
+    concepto: "La fibra es la tecnología predominante en enlaces troncales y centros de datos."
+  },
+  {
+    id: 11,
+    pregunta: "¿Qué es un protocolo de comunicación?",
+    opciones: ["Un cable físico", "Un conjunto de reglas y formatos estandarizados para la interoperabilidad", "Un dispositivo de red", "Una dirección IP", "Un tipo de malware"],
+    correcta: 1,
+    explicacionBien: "Correcto. Un protocolo define cómo se comunican los dispositivos, qué formato tienen los mensajes y cómo se manejan errores y confirmaciones.",
+    explicacionMal: "La respuesta correcta era la opción B. Sin protocolos, cada fabricante utilizaría métodos incompatibles y la comunicación sería imposible.",
+    concepto: "TCP, IP, HTTP y DNS son ejemplos de protocolos ampliamente utilizados."
+  },
+  {
+    id: 12,
+    pregunta: "¿Qué topología utiliza un único cable principal por donde viaja la información?",
+    opciones: ["Estrella", "Bus", "Anillo", "Malla", "Híbrida"],
+    correcta: 1,
+    explicacionBien: "Correcto. La topología Bus utiliza un único cable principal compartido por todos los dispositivos conectados.",
+    explicacionMal: "La respuesta correcta era Bus. Esta topología fue muy utilizada en redes antiguas, pero actualmente ha sido reemplazada por diseños más eficientes.",
+    concepto: "Un problema en el cable principal puede afectar toda la red."
+  },
+  {
+    id: 13,
+    pregunta: "¿Qué tipo de enrutamiento requiere que el administrador configure las rutas manualmente?",
+    opciones: ["Dinámico", "Estático", "IGP", "EGP", "OSPF"],
+    correcta: 1,
+    explicacionBien: "Correcto. En el enrutamiento estático el administrador configura manualmente las rutas que utilizará el router.",
+    explicacionMal: "La respuesta correcta era Estático. Este método ofrece control total, pero requiere intervención manual cada vez que cambia la topología.",
+    concepto: "Las redes grandes suelen utilizar protocolos dinámicos como OSPF o EIGRP."
+  },
+  {
+    id: 14,
+    pregunta: "¿Qué dispositivo proporciona conectividad a redes locales sin necesidad de cables?",
+    opciones: ["Switch", "Router", "Firewall", "Punto de Acceso Wi-Fi", "Servidor DHCP"],
+    correcta: 3,
+    explicacionBien: "Correcto. Un Access Point permite que dispositivos inalámbricos se conecten a la red mediante señales de radio.",
+    explicacionMal: "La respuesta correcta era Punto de Acceso Wi-Fi. Aunque algunos routers incluyen esta función, el dispositivo especializado es el Access Point.",
+    concepto: "Los estándares Wi-Fi modernos pertenecen a la familia IEEE 802.11."
+  },
+  {
+    id: 15,
+    pregunta: "¿Qué significa el 'encapsulamiento' en redes?",
+    opciones: ["Cifrar los datos para que nadie los lea", "Cómo se empaquetan y estructuran los datos con encabezados de cada capa para su transmisión", "Comprimir archivos para que pesen menos", "Bloquear puertos en un firewall", "Asignar una IP a un dispositivo"],
+    correcta: 1,
+    explicacionBien: "Correcto. El encapsulamiento agrega información de control en cada capa del modelo OSI o TCP/IP antes de transmitir los datos.",
+    explicacionMal: "La respuesta correcta era la opción B. El encapsulamiento permite que cada capa agregue información necesaria para que los datos lleguen correctamente.",
+    concepto: "En el destino ocurre el proceso inverso llamado desencapsulamiento."
+  },
+  {
+    id: 16,
+    pregunta: "OSPF y EIGRP son ejemplos de protocolos de qué tipo?",
+    opciones: ["EGP", "IGP (Interior)", "Transporte", "Aplicación", "Enlace"],
+    correcta: 1,
+    explicacionBien: "Correcto. OSPF y EIGRP son protocolos diseñados para intercambiar rutas dentro de una misma organización o sistema autónomo.",
+    explicacionMal: "La respuesta correcta era IGP. Estos protocolos no están diseñados para el intercambio global de rutas en Internet como BGP.",
+    concepto: "IGP significa Interior Gateway Protocol."
+  },
+  {
+    id: 17,
+    pregunta: "En la topología de Anillo, ¿cómo viaja la información generalmente?",
+    opciones: ["En todas direcciones simultáneamente", "Desde un nodo central", "En una sola dirección, de dispositivo en dispositivo formando un círculo", "Por broadcast a todos los nodos", "A través de múltiples rutas redundantes"],
+    correcta: 2,
+    explicacionBien: "Correcto. En la topología anillo los datos suelen viajar siguiendo un recorrido circular predefinido entre los dispositivos.",
+    explicacionMal: "La respuesta correcta era la opción C. Históricamente esta topología fue utilizada por tecnologías como Token Ring.",
+    concepto: "Algunas implementaciones modernas incorporan mecanismos de redundancia."
+  },
+  {
+    id: 18,
+    pregunta: "¿Cuál es la función principal de las tablas de enrutamiento?",
+    opciones: ["Almacenar contraseñas de usuarios", "Mantener registros de las rutas disponibles para tomar decisiones de envío de paquetes", "Traducir nombres de dominio a IPs", "Cifrar el tráfico saliente", "Asignar direcciones IP por DHCP"],
+    correcta: 1,
+    explicacionBien: "Correcto. La tabla de enrutamiento almacena las rutas conocidas y permite al router decidir por dónde enviar cada paquete.",
+    explicacionMal: "La respuesta correcta era la opción B. Sin una tabla de enrutamiento el router no sabría hacia dónde reenviar el tráfico.",
+    concepto: "Las rutas pueden ser estáticas o aprendidas dinámicamente mediante protocolos de enrutamiento."
+  },
+  {
+    id: 19,
+    pregunta: "¿Qué tecnología de red móvil ofrece bajas latencias y alta capacidad para IoT?",
+    opciones: ["3G", "4G LTE", "5G", "Bluetooth", "Wi-Fi 4"],
+    correcta: 2,
+    explicacionBien: "Correcto. La tecnología 5G fue diseñada para ofrecer altas velocidades, baja latencia y soporte para millones de dispositivos IoT.",
+    explicacionMal: "La respuesta correcta era 5G. Aunque 4G LTE sigue siendo ampliamente utilizada, 5G mejora significativamente el rendimiento.",
+    concepto: "Aplicaciones como vehículos autónomos dependen de las características avanzadas de 5G."
+  },
+  {
+    id: 20,
+    pregunta: "¿Cuál de las siguientes NO es una función típica del Administrador de Redes?",
+    opciones: ["Configurar routers y switches", "Monitorear el rendimiento", "Desarrollar el código fuente de las aplicaciones web de la empresa", "Aplicar medidas de seguridad", "Administrar permisos de acceso"],
+    correcta: 2,
+    explicacionBien: "Correcto. El administrador de redes se encarga de la infraestructura, no del desarrollo de aplicaciones.",
+    explicacionMal: "La respuesta correcta era la opción C. La programación de aplicaciones corresponde al área de desarrollo de software.",
+    concepto: "Las funciones típicas incluyen monitoreo, configuración, seguridad, documentación y resolución de incidentes."
+  },
+  {
+    id: 21,
+    pregunta: "¿Cuántas capas tiene el modelo OSI y cuántas el modelo TCP/IP?",
+    opciones: ["4 y 7", "7 y 5", "7 y 4", "5 y 7", "6 y 4"],
+    correcta: 2,
+    explicacionBien: "Correcto. El modelo OSI posee 7 capas y el modelo TCP/IP posee 4 capas más simplificadas.",
+    explicacionMal: "La respuesta correcta era 7 y 4. TCP/IP agrupa varias capas del modelo OSI en una estructura más simple.",
+    concepto: "OSI: Física, Enlace, Red, Transporte, Sesión, Presentación y Aplicación. TCP/IP: Acceso a Red, Internet, Transporte y Aplicación."
+  },
+  {
+    id: 22,
+    pregunta: "¿Qué protocolo de la Capa de Transporte garantiza la entrega confiable y ordenada?",
+    opciones: ["UDP", "IP", "TCP", "ICMP", "ARP"],
+    correcta: 2,
+    explicacionBien: "Correcto. TCP es un protocolo orientado a conexión que garantiza la entrega de datos, controla errores y mantiene el orden.",
+    explicacionMal: "La respuesta correcta era TCP. UDP es más rápido porque elimina muchos controles, pero no garantiza entrega ni orden.",
+    concepto: "Aplicaciones como navegación web, banca en línea y correo electrónico suelen utilizar TCP."
+  },
+  {
+    id: 23,
+    pregunta: "¿Cuál es el puerto estándar para el protocolo DNS?",
+    opciones: ["80", "443", "21", "53", "25"],
+    correcta: 3,
+    explicacionBien: "Correcto. DNS utiliza el puerto 53 para resolver nombres de dominio en direcciones IP.",
+    explicacionMal: "La respuesta correcta era el puerto 53. Los puertos 80 y 443 corresponden a HTTP y HTTPS.",
+    concepto: "Sin DNS tendríamos que memorizar direcciones IP en lugar de utilizar nombres como google.com."
+  },
+  {
+    id: 24,
+    pregunta: "Si un sitio web carga texto pero las imágenes dan '404 Not Found', ¿en qué capa está el problema?",
+    opciones: ["Capa Física", "Capa de Red", "Capa de Transporte", "Capa de Aplicación", "Capa de Enlace"],
+    correcta: 3,
+    explicacionBien: "Correcto. El error 404 pertenece al protocolo HTTP, que opera en la capa de Aplicación. La conectividad de red funciona correctamente.",
+    explicacionMal: "La respuesta correcta era Capa de Aplicación. Un error 404 significa que el servidor fue alcanzado, pero el recurso no existe.",
+    concepto: "Otros errores HTTP comunes son 403 (Forbidden), 500 (Internal Server Error) y 503 (Service Unavailable)."
+  },
+  {
+    id: 25,
+    pregunta: "¿Qué tipo de NAT permite que múltiples dispositivos compartan UNA SOLA IP pública diferenciándose por puertos?",
+    opciones: ["NAT Estática", "NAT Dinámica", "Sobrecarga de NAT (PAT)", "NAT con Superposición", "NAT Inverso"],
+    correcta: 2,
+    explicacionBien: "Correcto. PAT (Port Address Translation) permite que múltiples dispositivos compartan una única dirección IP pública utilizando diferentes puertos.",
+    explicacionMal: "La respuesta correcta era PAT o NAT Overload. Esta tecnología es utilizada en prácticamente todos los hogares y pequeñas empresas.",
+    concepto: "Sin PAT sería necesario asignar una dirección IP pública diferente a cada dispositivo."
+  },
+  {
+    id: 26,
+    pregunta: "¿Para qué sirve el protocolo STP (Spanning Tree Protocol)?",
+    opciones: ["Para enrutar paquetes entre VLANs", "Para evitar bucles en la red cuando hay enlaces redundantes entre switches", "Para cifrar el tráfico de la red", "Para asignar IPs dinámicamente", "Para traducir nombres de dominio"],
+    correcta: 1,
+    explicacionBien: "Correcto. STP identifica rutas redundantes y bloquea automáticamente algunas de ellas para evitar bucles de Capa 2.",
+    explicacionMal: "La respuesta correcta era evitar bucles. Sin STP podrían producirse tormentas de broadcast capaces de colapsar la red.",
+    concepto: "RSTP (Rapid Spanning Tree Protocol) es una versión mejorada y más rápida de STP."
+  },
+  {
+    id: 27,
+    pregunta: "¿Qué protocolo se usa para transferir archivos de forma segura por línea de comandos?",
+    opciones: ["FTP", "TFTP", "SSH", "Telnet", "SMTP"],
+    correcta: 2,
+    explicacionBien: "Correcto. SSH proporciona acceso remoto seguro mediante cifrado y sirve como base para SCP y SFTP.",
+    explicacionMal: "La respuesta correcta era SSH. Aunque SCP y SFTP son los protocolos específicamente diseñados para transferir archivos, ambos funcionan sobre SSH.",
+    concepto: "SSH reemplazó a Telnet debido a que cifra toda la comunicación."
+  },
+  {
+    id: 28,
+    pregunta: "En VMware, si quieres que una VM obtenga IP del DHCP físico y sea visible en la red, ¿qué modo usas?",
+    opciones: ["NAT", "Host-Only", "Bridged", "Custom", "Isolated"],
+    correcta: 2,
+    explicacionBien: "Correcto. En modo Bridged la máquina virtual se conecta directamente a la red física y obtiene una dirección IP del mismo DHCP.",
+    explicacionMal: "La respuesta correcta era Bridged. NAT comparte la conexión del host y Host-Only crea una red privada aislada.",
+    concepto: "Bridged es ideal cuando una VM debe comportarse como un equipo real dentro de la red corporativa."
+  },
+  {
+    id: 29,
+    pregunta: "¿Qué protocolo de enrutamiento usa el 'conteo de saltos' como métrica?",
+    opciones: ["OSPF", "BGP", "EIGRP", "RIP", "IS-IS"],
+    correcta: 3,
+    explicacionBien: "Correcto. RIP utiliza como métrica el número de saltos (hop count) para seleccionar rutas.",
+    explicacionMal: "La respuesta correcta era RIP. Debido a sus limitaciones de escalabilidad, actualmente suele utilizarse solo con fines educativos.",
+    concepto: "OSPF utiliza costo y EIGRP utiliza una métrica compuesta basada en ancho de banda y retraso."
+  },
+  {
+    id: 30,
+    pregunta: "¿Cuál es la función principal de la Capa de Red (Capa 3)?",
+    opciones: ["Transmitir bits por el cable", "Proveer direccionamiento lógico (IP) y enrutamiento entre redes", "Cifrar los datos", "Establecer sesiones entre aplicaciones", "Definir el formato de los archivos"],
+    correcta: 1,
+    explicacionBien: "Correcto. La Capa de Red se encarga de identificar dispositivos mediante direcciones IP y determinar la ruta que seguirán los paquetes.",
+    explicacionMal: "La respuesta correcta era direccionamiento lógico y enrutamiento. La transmisión de bits corresponde a la Capa Física.",
+    concepto: "Los routers son los principales dispositivos asociados con la Capa 3."
+  },
+  {
+    id: 31,
+    pregunta: "¿Qué protocolo de Capa de Aplicación se usa para el envío de correos electrónicos?",
+    opciones: ["POP3", "IMAP", "SMTP", "SNMP", "DHCP"],
+    correcta: 2,
+    explicacionBien: "Correcto. SMTP (Simple Mail Transfer Protocol) es el protocolo utilizado para enviar correos electrónicos entre servidores.",
+    explicacionMal: "La respuesta correcta era SMTP. POP3 e IMAP se utilizan para recibir y gestionar correos.",
+    concepto: "Una configuración típica de correo utiliza SMTP para enviar e IMAP para recibir."
+  },
+  {
+    id: 32,
+    pregunta: "Si configuras NAT Estática, ¿qué estás haciendo?",
+    opciones: ["Asignando IPs públicas de un pool temporalmente", "Mapeando una IP privada a una IP pública fija permanentemente (1 a 1)", "Compartiendo una IP pública usando puertos", "Traduciendo IPs de dos redes que usan el mismo rango", "Bloqueando el tráfico saliente"],
+    correcta: 1,
+    explicacionBien: "Correcto. NAT Estática crea una asociación permanente entre una dirección privada y una pública.",
+    explicacionMal: "La respuesta correcta era NAT Estática 1:1. Este método es común para publicar servidores internos accesibles desde Internet.",
+    concepto: "Los servidores web empresariales suelen utilizar NAT Estática para ser accesibles desde el exterior."
+  },
+  {
+    id: 33,
+    pregunta: "¿Qué técnica permite transportar tráfico de múltiples VLANs a través de un único enlace físico?",
+    opciones: ["STP", "Trunking (802.1Q)", "NAT", "PAT", "OSPF"],
+    correcta: 1,
+    explicacionBien: "Correcto. El trunking permite transportar tráfico de múltiples VLAN a través de un único enlace físico.",
+    explicacionMal: "La respuesta correcta era Trunking. Cada trama Ethernet recibe una etiqueta VLAN para que los switches sepan a qué red pertenece.",
+    concepto: "802.1Q es el estándar más utilizado para implementar VLAN Trunking."
+  },
+  {
+    id: 34,
+    pregunta: "¿Cuál es la principal desventaja de UDP frente a TCP?",
+    opciones: ["Es más lento", "Consume más ancho de banda", "No garantiza la entrega ni el orden de los paquetes", "Solo sirve para correos electrónicos", "Requiere más configuración"],
+    correcta: 2,
+    explicacionBien: "Correcto. UDP prioriza la velocidad y reduce la sobrecarga eliminando mecanismos de confirmación y control de errores.",
+    explicacionMal: "La respuesta correcta era la falta de garantía de entrega y orden. Esto hace que UDP sea ideal para aplicaciones en tiempo real.",
+    concepto: "Streaming, VoIP y videojuegos en línea suelen utilizar UDP."
+  },
+  {
+    id: 35,
+    pregunta: "¿Qué comando de Windows se usa para ver la ruta exacta (saltos) que toman los paquetes?",
+    opciones: ["ping", "ipconfig", "nslookup", "tracert", "netstat"],
+    correcta: 3,
+    explicacionBien: "Correcto. El comando tracert muestra todos los routers intermedios por los que pasa un paquete hasta llegar a su destino.",
+    explicacionMal: "La respuesta correcta era tracert. Ping únicamente verifica conectividad, mientras que tracert permite visualizar el recorrido completo.",
+    concepto: "En Linux el equivalente es traceroute."
+  },
+  {
+    id: 36,
+    pregunta: "En Linux, ¿qué comando usas para cambiar los permisos de un archivo?",
+    opciones: ["chown", "chmod", "ps", "grep", "sudo"],
+    correcta: 1,
+    explicacionBien: "Correcto. chmod (change mode) modifica los permisos de lectura, escritura y ejecución de archivos y directorios.",
+    explicacionMal: "La respuesta correcta era chmod. chown cambia el propietario, pero no los permisos.",
+    concepto: "Ejemplo: chmod 755 archivo.sh"
+  },
+  {
+    id: 37,
+    pregunta: "¿Qué protocolo de Capa de Aplicación asigna direcciones IP dinámicamente a los clientes?",
+    opciones: ["DNS", "ARP", "DHCP", "ICMP", "BGP"],
+    correcta: 2,
+    explicacionBien: "Correcto. DHCP asigna automáticamente direcciones IP y otros parámetros de red a los clientes.",
+    explicacionMal: "La respuesta correcta era DHCP. Sin este protocolo sería necesario configurar manualmente cada equipo.",
+    concepto: "DHCP también entrega máscara de subred, gateway y servidores DNS."
+  },
+  {
+    id: 38,
+    pregunta: "¿Qué hace el comando nslookup?",
+    opciones: ["Muestra la tabla de enrutamiento", "Consulta a un servidor DNS para resolver un nombre de dominio a una IP", "Escanea puertos abiertos", "Reinicia la tarjeta de red", "Muestra los procesos activos"],
+    correcta: 1,
+    explicacionBien: "Correcto. nslookup es una herramienta de diagnóstico DNS que permite consultar registros y verificar la resolución de nombres.",
+    explicacionMal: "La respuesta correcta era consultar DNS. Es una de las herramientas más utilizadas para solucionar problemas de resolución de nombres.",
+    concepto: "Alternativas modernas incluyen dig (Linux) y Resolve-DnsName (PowerShell)."
+  },
+  {
+    id: 39,
+    pregunta: "¿Qué protocolo se utiliza para la gestión y monitoreo de dispositivos de red?",
+    opciones: ["SMTP", "FTP", "SNMP", "SSH", "HTTPS"],
+    correcta: 2,
+    explicacionBien: "Correcto. SNMP permite monitorear y administrar dispositivos de red obteniendo métricas, estados e información operativa.",
+    explicacionMal: "La respuesta correcta era SNMP. Este protocolo es utilizado por plataformas de monitoreo como Zabbix, PRTG y SolarWinds.",
+    concepto: "Herramientas como Zabbix, PRTG y SolarWinds utilizan SNMP ampliamente."
+  },
+  {
+    id: 40,
+    pregunta: "Si dos redes que quieres conectar por VPN usan el mismo rango (ej. 192.168.1.0/24), ¿qué problema tienes?",
+    opciones: ["Bucle de STP, se arregla con Trunking", "NAT con Superposición (Overlapping), se requiere NAT doble", "Falta de DHCP, se arregla con NAT Dinámica", "Conflicto de DNS, se arregla con BIND", "Problema de Capa Física, se arregla con fibra"],
+    correcta: 1,
+    explicacionBien: "Correcto. Cuando dos sedes utilizan exactamente el mismo rango IP privado, se produce NAT Overlapping.",
+    explicacionMal: "La respuesta correcta era NAT Overlapping. Los routers no pueden diferenciar correctamente dos redes con el mismo direccionamiento.",
+    concepto: "Uno de los errores más comunes en proyectos VPN es utilizar 192.168.1.0/24 en todas las sucursales sin planificación."
+  },
+  {
+    id: 41,
+    pregunta: "¿Cuáles son los tres pilares de la 'Triada CIA' en seguridad informática?",
+    opciones: ["Control, Integridad, Autenticación", "Confidencialidad, Integridad, Disponibilidad", "Cifrado, Identidad, Acceso", "Confidencialidad, Internet, Abono", "Control, Internet, Auditoría"],
+    correcta: 1,
+    explicacionBien: "Correcto. La Tríada CIA representa: Confidencialidad, Integridad y Disponibilidad.",
+    explicacionMal: "La respuesta correcta era Confidencialidad, Integridad y Disponibilidad. Estas tres características son la base de todos los controles de seguridad.",
+    concepto: "La mayoría de políticas, auditorías y marcos de seguridad se diseñan para proteger estos tres pilares."
+  },
+  {
+    id: 42,
+    pregunta: "¿Qué principio de la Triada CIA garantiza que la información no sea alterada?",
+    opciones: ["Confidencialidad", "Disponibilidad", "Integridad", "No Repudio", "Autenticación"],
+    correcta: 2,
+    explicacionBien: "Correcto. La integridad garantiza que los datos no sean modificados de forma no autorizada.",
+    explicacionMal: "La respuesta correcta era Integridad. No basta con proteger quién ve la información; también es necesario asegurar que el contenido permanezca exacto.",
+    concepto: "Los hashes criptográficos ayudan a verificar la integridad de los datos."
+  },
+  {
+    id: 43,
+    pregunta: "¿Qué es un ataque de Denegación de Servicio (DoS)?",
+    opciones: ["Robar contraseñas de usuarios", "Saturar un sistema con tráfico para que usuarios legítimos no puedan acceder", "Cifrar los datos para pedir un rescate", "Escuchar el tráfico de red pasivamente", "Instalar un firewall sin configurar"],
+    correcta: 1,
+    explicacionBien: "Correcto. Un ataque DoS busca consumir los recursos de un sistema hasta impedir que los usuarios legítimos puedan utilizarlo.",
+    explicacionMal: "La respuesta correcta era saturar el sistema con tráfico. El objetivo principal es afectar la disponibilidad del servicio.",
+    concepto: "Cuando el ataque proviene de miles de equipos comprometidos simultáneamente se denomina DDoS."
+  },
+  {
+    id: 44,
+    pregunta: "En el modelo AAA, ¿qué significa la segunda 'A' (Authorization)?",
+    opciones: ["Definir quién eres", "Definir qué recursos puedes usar y qué acciones puedes realizar", "Registrar lo que hiciste en un log", "Cifrar tu contraseña", "Asignar una IP pública"],
+    correcta: 1,
+    explicacionBien: "Correcto. La autorización determina qué permisos tiene un usuario después de haber demostrado su identidad.",
+    explicacionMal: "La respuesta correcta era definir permisos. Primero se autentica la identidad y luego se determinan las acciones permitidas.",
+    concepto: "AAA significa Authentication, Authorization y Accounting."
+  },
+  {
+    id: 45,
+    pregunta: "¿Qué protocolo se usa comúnmente para AAA en redes?",
+    opciones: ["HTTP", "RADIUS", "FTP", "SNMP", "SMTP"],
+    correcta: 1,
+    explicacionBien: "Correcto. RADIUS es uno de los protocolos AAA más utilizados para centralizar autenticación, autorización y registro.",
+    explicacionMal: "La respuesta correcta era RADIUS. Es ampliamente utilizado en ISPs, Wi-Fi empresarial, VPNs y control de acceso.",
+    concepto: "TACACS+ es otra solución AAA muy utilizada en entornos Cisco."
+  },
+  {
+    id: 46,
+    pregunta: "¿Qué es una ACL (Access Control List)?",
+    opciones: ["Una lista de contraseñas de usuarios", "Un conjunto de reglas en routers/firewalls para permitir o denegar tráfico por IP/puerto", "Un tipo de virus", "Un protocolo de enrutamiento", "Un certificado digital"],
+    correcta: 1,
+    explicacionBien: "Correcto. Una ACL permite controlar qué tráfico puede ingresar o salir de una red según criterios específicos.",
+    explicacionMal: "La respuesta correcta era ACL como lista de control de acceso. Son una de las herramientas más importantes para segmentar y proteger redes.",
+    concepto: "Las ACL pueden filtrar por dirección IP, protocolo, puerto y otros parámetros."
+  },
+  {
+    id: 47,
+    pregunta: "¿Cuál es la diferencia entre cifrado simétrico y asimétrico?",
+    opciones: ["El simétrico usa dos claves y el asimétrico una", "El simétrico usa una misma clave compartida; el asimétrico usa un par (pública/privada)", "El simétrico es más lento", "El asimétrico solo se usa para archivos locales", "No hay diferencia"],
+    correcta: 1,
+    explicacionBien: "Correcto. Los algoritmos simétricos utilizan una sola clave mientras que los asimétricos emplean una clave pública y otra privada.",
+    explicacionMal: "La respuesta correcta era la opción B. Los algoritmos simétricos son más rápidos, mientras que los asimétricos facilitan intercambios seguros.",
+    concepto: "AES es simétrico; RSA es asimétrico."
+  },
+  {
+    id: 48,
+    pregunta: "¿Qué algoritmo es un ejemplo clásico de cifrado de Clave Asimétrica?",
+    opciones: ["AES", "DES", "RSA", "MD5", "3DES"],
+    correcta: 2,
+    explicacionBien: "Correcto. RSA es uno de los algoritmos de cifrado asimétrico más conocidos y utilizados.",
+    explicacionMal: "La respuesta correcta era RSA. AES, DES y 3DES pertenecen al grupo de algoritmos simétricos.",
+    concepto: "RSA suele utilizarse para intercambio seguro de claves y firmas digitales."
+  },
+  {
+    id: 49,
+    pregunta: "¿Qué función cumple un Certificado Digital?",
+    opciones: ["Cifrar el disco duro", "Verificar la identidad de una entidad mediante una Autoridad de Certificación", "Bloquear puertos", "Asignar direcciones IP", "Hacer copias de seguridad"],
+    correcta: 1,
+    explicacionBien: "Correcto. Un certificado digital permite validar la identidad de un servidor o usuario y establecer comunicaciones seguras.",
+    explicacionMal: "La respuesta correcta era verificar identidad. El certificado no reemplaza al cifrado, sino que ayuda a garantizar la autenticidad.",
+    concepto: "HTTPS utiliza certificados digitales emitidos por Autoridades Certificadoras (CA)."
+  },
+  {
+    id: 50,
+    pregunta: "¿Qué diferencia hay entre un IDS y un IPS?",
+    opciones: ["El IDS bloquea y el IPS solo alerta", "El IDS solo monitorea y alerta; el IPS monitorea y bloquea automáticamente", "Son exactamente lo mismo", "El IDS es para redes LAN y el IPS para WAN", "El IPS solo funciona con WiFi"],
+    correcta: 1,
+    explicacionBien: "Correcto. Un IDS detecta actividades sospechosas mientras que un IPS además puede actuar automáticamente.",
+    explicacionMal: "La respuesta correcta era la opción B. La principal diferencia es la capacidad de prevención automática del IPS.",
+    concepto: "IDS = Detección. IPS = Detección + Prevención."
+  },
+  {
+    id: 51,
+    pregunta: "¿Qué es el 'No Repudio' en seguridad?",
+    opciones: ["Que un usuario no pueda negar la autoría de una acción", "Que el firewall no rechace paquetes", "Que los datos no se pierdan", "Que no se necesite contraseña", "Que la red siempre esté disponible"],
+    correcta: 0,
+    explicacionBien: "Correcto. El no repudio garantiza evidencia suficiente para demostrar que una acción fue realizada por un usuario específico.",
+    explicacionMal: "La respuesta correcta era que el usuario no pueda negar su participación. Este principio es importante en contratos digitales.",
+    concepto: "Las firmas digitales son una de las principales herramientas para garantizar no repudio."
+  },
+  {
+    id: 52,
+    pregunta: "¿Qué política establece qué puedes y NO puedes hacer con los equipos de la empresa?",
+    opciones: ["Política de Acceso", "Política de Uso Aceptable", "Política de Backup", "Política de Cambios", "Política de Respuesta a Incidentes"],
+    correcta: 1,
+    explicacionBien: "Correcto. Esta política establece las reglas sobre cómo los usuarios pueden utilizar los recursos tecnológicos de la organización.",
+    explicacionMal: "La respuesta correcta era Política de Uso Aceptable. Define actividades permitidas y prohibidas para los usuarios.",
+    concepto: "Muchas empresas prohíben software no autorizado mediante esta política."
+  },
+  {
+    id: 53,
+    pregunta: "¿Qué significa BCDR en el contexto de políticas de seguridad?",
+    opciones: ["Bloqueo de Cuentas y Detección de Riesgos", "Business Continuity and Disaster Recovery", "Base de Cifrado de Datos en Red", "Backup de Cifrado y Enrutamiento", "Control de Acceso y Dominio de Red"],
+    correcta: 1,
+    explicacionBien: "Correcto. BCDR busca garantizar la continuidad de las operaciones y la recuperación ante incidentes graves.",
+    explicacionMal: "La respuesta correcta era Business Continuity and Disaster Recovery. Su objetivo es minimizar interrupciones.",
+    concepto: "Los respaldos y sitios alternos forman parte de muchas estrategias BCDR."
+  },
+  {
+    id: 54,
+    pregunta: "Según las buenas prácticas, ¿cuál es la longitud mínima recomendada de contraseñas hoy?",
+    opciones: ["4 caracteres", "6 caracteres", "8 caracteres", "12 caracteres", "20 caracteres"],
+    correcta: 3,
+    explicacionBien: "Correcto. Actualmente se recomienda utilizar contraseñas largas y complejas, idealmente complementadas con MFA.",
+    explicacionMal: "La respuesta correcta era 12 caracteres. Las recomendaciones modernas priorizan longitud sobre cambios frecuentes.",
+    concepto: "Las frases de contraseña suelen ser más seguras que palabras cortas complejas."
+  },
+  {
+    id: 55,
+    pregunta: "¿Qué es el Principio de Menor Privilegio?",
+    opciones: ["Dar a todos los usuarios permisos de administrador", "Otorgar a cada usuario SOLO los permisos mínimos necesarios", "No dar acceso a internet a nadie", "Cambiar las contraseñas cada día", "Usar solo claves simétricas"],
+    correcta: 1,
+    explicacionBien: "Correcto. El principio de menor privilegio reduce la superficie de ataque y limita el impacto de una cuenta comprometida.",
+    explicacionMal: "La respuesta correcta era otorgar únicamente los permisos necesarios. Dar privilegios excesivos aumenta los riesgos.",
+    concepto: "Este principio es fundamental en Zero Trust."
+  },
+  {
+    id: 56,
+    pregunta: "¿Qué herramienta monitorea la red para evitar que información confidencial salga de la organización?",
+    opciones: ["IDS", "DLP (Prevención de Pérdida de Datos)", "DHCP", "STP", "NAT"],
+    correcta: 1,
+    explicacionBien: "Correcto. DLP identifica y evita que información sensible salga de la organización sin autorización.",
+    explicacionMal: "La respuesta correcta era DLP. Estas soluciones monitorean correos, archivos y transferencias para detectar fugas.",
+    concepto: "DLP es ampliamente utilizado para proteger información financiera y datos personales."
+  },
+  {
+    id: 57,
+    pregunta: "¿Qué tipo de ataque es el Ransomware?",
+    opciones: ["Un ataque que satura la red", "Un malware que cifra los datos de la víctima y exige un pago", "Un fallo en el cableado", "Un error de configuración de DNS", "Un ataque de suplantación de IP"],
+    correcta: 1,
+    explicacionBien: "Correcto. El ransomware bloquea el acceso a la información mediante cifrado y exige un rescate.",
+    explicacionMal: "La respuesta correcta era ransomware como malware de secuestro de datos. Es una de las amenazas más dañinas.",
+    concepto: "Las copias de seguridad son una de las mejores defensas contra ransomware."
+  },
+  {
+    id: 58,
+    pregunta: "¿Cuál es el primer paso en una Auditoría de Seguridad?",
+    opciones: ["Instalar un firewall nuevo", "Desconectar la red de Internet", "Recopilación de información e inventario de todos los sistemas", "Cambiar todas las contraseñas", "Borrar los logs"],
+    correcta: 2,
+    explicacionBien: "Correcto. Antes de proteger o auditar una infraestructura es necesario conocer exactamente qué activos existen.",
+    explicacionMal: "La respuesta correcta era realizar un inventario. No se puede evaluar ni proteger adecuadamente aquello que se desconoce.",
+    concepto: "La gestión de activos es una parte crítica de cualquier programa de seguridad."
+  },
+  {
+    id: 59,
+    pregunta: "¿Qué es el MFA y por qué es superior a la contraseña?",
+    opciones: ["Usar la misma contraseña en todas las redes", "Requerir dos o más pruebas de identidad", "Tener múltiples cuentas de correo", "Usar múltiples firewalls", "Cifrar los datos dos veces"],
+    correcta: 1,
+    explicacionBien: "Correcto. MFA añade capas adicionales de protección más allá de la contraseña tradicional.",
+    explicacionMal: "La respuesta correcta era requerir múltiples factores. Incluso si una contraseña es robada, el atacante necesitará un segundo factor.",
+    concepto: "Los factores pueden ser algo que sabes, algo que tienes o algo que eres."
+  },
+  {
+    id: 60,
+    pregunta: "¿Qué protocolo proporciona cifrado para comunicaciones web (el candadito)?",
+    opciones: ["HTTP", "FTP", "SSL/TLS", "SMTP", "SNMP"],
+    correcta: 2,
+    explicacionBien: "Correcto. TLS es el protocolo utilizado actualmente para cifrar comunicaciones web seguras mediante HTTPS.",
+    explicacionMal: "La respuesta correcta era SSL/TLS. Aunque SSL está obsoleto, muchas personas siguen utilizando el término.",
+    concepto: "Cuando visitas una página HTTPS, el navegador utiliza TLS para proteger la comunicación."
+  },
+  {
+    id: 61,
+    pregunta: "¿Cuál es la diferencia entre un hipervisor Tipo 1 y uno Tipo 2?",
+    opciones: ["El Tipo 1 se instala sobre un SO y el Tipo 2 directo en el hardware", "El Tipo 1 (Bare-Metal) se instala directo en el hardware; el Tipo 2 (Hosted) se instala sobre un SO", "El Tipo 1 es para contenedores y el Tipo 2 para VMs", "El Tipo 1 es de Microsoft y el Tipo 2 de Linux", "No hay diferencia"],
+    correcta: 1,
+    explicacionBien: "Correcto. Los hipervisores Tipo 1 se ejecutan directamente sobre el hardware físico, ofreciendo mejor rendimiento.",
+    explicacionMal: "La respuesta correcta era la opción B. Un error común es invertir ambos conceptos.",
+    concepto: "VMware ESXi es Tipo 1. VirtualBox y VMware Workstation son Tipo 2."
+  },
+  {
+    id: 62,
+    pregunta: "¿Cuál es la diferencia fundamental entre una VM y un Contenedor?",
+    opciones: ["La VM no tiene SO; el contenedor sí", "La VM virtualiza el hardware y tiene su propio Kernel; el contenedor virtualiza el SO y comparte el Kernel", "Los contenedores son más pesados que las VMs", "Las VMs solo corren Linux; los contenedores solo Windows", "Los contenedores no se pueden conectar a red"],
+    correcta: 1,
+    explicacionBien: "Correcto. Una máquina virtual incluye un sistema operativo completo, mientras que un contenedor comparte el kernel del host.",
+    explicacionMal: "La respuesta correcta era la opción B. Esta diferencia explica por qué los contenedores consumen menos recursos.",
+    concepto: "Docker utiliza contenedores; VMware utiliza máquinas virtuales."
+  },
+  {
+    id: 63,
+    pregunta: "En VMware, si necesitas que tus VMs estén en una red 100% aislada sin internet, ¿qué modo usas?",
+    opciones: ["NAT", "Bridged", "Host-Only", "Custom", "WAN"],
+    correcta: 2,
+    explicacionBien: "Correcto. Host-Only crea una red privada donde las máquinas virtuales pueden comunicarse con el Host sin acceso a Internet.",
+    explicacionMal: "La respuesta correcta era Host-Only. NAT permite salida a Internet y Bridged conecta directamente a la red física.",
+    concepto: "Host-Only es ideal para laboratorios de Active Directory y pruebas aisladas."
+  },
+  {
+    id: 64,
+    pregunta: "¿Qué es Kubernetes?",
+    opciones: ["Un hipervisor Tipo 1", "Un sistema operativo para routers", "Una plataforma de orquestación de contenedores", "Un protocolo de enrutamiento", "Un comando de Linux para ver IPs"],
+    correcta: 2,
+    explicacionBien: "Correcto. Kubernetes automatiza el despliegue, escalado, balanceo de carga y administración de contenedores.",
+    explicacionMal: "La respuesta correcta era plataforma de orquestación de contenedores. Kubernetes no reemplaza a Docker.",
+    concepto: "Empresas como Google, Amazon y Microsoft utilizan Kubernetes masivamente."
+  },
+  {
+    id: 65,
+    pregunta: "¿Qué comando de Linux usas para ver los procesos consumiendo CPU en tiempo real?",
+    opciones: ["ls -l", "pwd", "top (o htop)", "chmod", "tail"],
+    correcta: 2,
+    explicacionBien: "Correcto. top permite visualizar en tiempo real el uso de CPU, memoria y procesos activos.",
+    explicacionMal: "La respuesta correcta era top. Es una de las herramientas más utilizadas para diagnosticar problemas de rendimiento.",
+    concepto: "htop es una versión más moderna e interactiva de top."
+  },
+  {
+    id: 66,
+    pregunta: "En PowerShell, ¿qué cmdlet usas para listar los servicios de Windows?",
+    opciones: ["Get-IP", "Get-Service", "Get-Process", "Get-EventLog", "Get-ADUser"],
+    correcta: 1,
+    explicacionBien: "Correcto. Get-Service muestra todos los servicios de Windows junto con su estado actual.",
+    explicacionMal: "La respuesta correcta era Get-Service. Este cmdlet es muy utilizado para tareas de administración.",
+    concepto: "Puedes consultar un servicio específico usando: Get-Service spooler"
+  },
+  {
+    id: 67,
+    pregunta: "¿Qué comando de Linux usas para ver logs en tiempo real a medida que se escriben?",
+    opciones: ["cat archivo", "ls -l", "tail -f archivo", "grep archivo", "cd archivo"],
+    correcta: 2,
+    explicacionBien: "Correcto. El parámetro -f permite seguir en tiempo real los cambios que se van escribiendo en un archivo de registro.",
+    explicacionMal: "La respuesta correcta era tail -f. Es una herramienta fundamental para diagnosticar servidores Linux.",
+    concepto: "Muy utilizada para monitorear logs de Apache, Nginx y aplicaciones empresariales."
+  },
+  {
+    id: 68,
+    pregunta: "¿Qué arquitectura divide una aplicación gigante en pequeñas piezas independientes?",
+    opciones: ["Monolito", "Cliente-Servidor", "Microservicios", "Punto a Punto", "Mainframe"],
+    correcta: 2,
+    explicacionBien: "Correcto. Los microservicios dividen una aplicación grande en componentes pequeños e independientes.",
+    explicacionMal: "La respuesta correcta era Microservicios. Este enfoque facilita actualizaciones, escalabilidad y mantenimiento.",
+    concepto: "Netflix es uno de los ejemplos más conocidos de arquitectura basada en microservicios."
+  },
+  {
+    id: 69,
+    pregunta: "¿Qué tipo de mantenimiento se basa en sensores para predecir fallos antes de que ocurran?",
+    opciones: ["Correctivo", "Preventivo", "Predictivo", "Proactivo", "Reactivo"],
+    correcta: 2,
+    explicacionBien: "Correcto. El mantenimiento predictivo utiliza datos históricos, sensores y análisis para anticipar fallas.",
+    explicacionMal: "La respuesta correcta era Predictivo. A diferencia del correctivo, busca actuar antes de que se produzca una avería.",
+    concepto: "La inteligencia artificial está impulsando fuertemente el mantenimiento predictivo moderno."
+  },
+  {
+    id: 70,
+    pregunta: "En la arquitectura de un SO, ¿qué es el 'Kernel'?",
+    opciones: ["La interfaz gráfica", "El núcleo que gestiona el hardware y los recursos del sistema", "El explorador de archivos", "El navegador web", "La papelera de reciclaje"],
+    correcta: 1,
+    explicacionBien: "Correcto. El kernel es el componente central del sistema operativo y controla memoria, CPU, dispositivos y procesos.",
+    explicacionMal: "La respuesta correcta era el núcleo del sistema operativo. Sin el kernel el software no podría interactuar con el hardware.",
+    concepto: "Linux, Windows y macOS poseen kernels diferentes."
+  },
+  {
+    id: 71,
+    pregunta: "¿Qué comando de Windows usas para consultar si un nombre de dominio está resolviendo correctamente?",
+    opciones: ["ping", "ipconfig", "nslookup", "tracert", "netstat"],
+    correcta: 2,
+    explicacionBien: "Correcto. nslookup permite verificar si un nombre de dominio está resolviendo correctamente hacia una dirección IP.",
+    explicacionMal: "La respuesta correcta era nslookup. Aunque ping también puede mostrar una IP, nslookup está diseñado específicamente para consultas DNS.",
+    concepto: "Ejemplo: nslookup google.com"
+  },
+  {
+    id: 72,
+    pregunta: "En Linux, ¿qué comando usas para cambiar el propietario de un archivo?",
+    opciones: ["chmod", "chown", "sudo", "apt", "rm"],
+    correcta: 1,
+    explicacionBien: "Correcto. chown modifica el propietario de archivos y directorios dentro de Linux.",
+    explicacionMal: "La respuesta correcta era chown. chmod modifica permisos, mientras que chown modifica propietarios.",
+    concepto: "Ejemplo: chown usuario:grupo archivo.txt"
+  },
+  {
+    id: 73,
+    pregunta: "Si un servidor web Apache en Linux no carga, ¿qué comando usas PRIMERO para ver si el servicio está corriendo?",
+    opciones: ["ls -l", "systemctl status apache2", "ping localhost", "tail -f /var/log", "chmod 777 apache2"],
+    correcta: 1,
+    explicacionBien: "Correcto. Lo primero al diagnosticar un servicio es verificar si está activo, detenido o presenta errores.",
+    explicacionMal: "La respuesta correcta era systemctl status apache2. Antes de revisar configuraciones complejas, conviene comprobar el estado.",
+    concepto: "Muchas incidencias se resuelven simplemente identificando que el servicio está detenido."
+  },
+  {
+    id: 74,
+    pregunta: "¿Qué hipervisor es un ejemplo clásico de Tipo 1 (Bare-Metal)?",
+    opciones: ["VirtualBox", "VMware Workstation", "VMware ESXi", "QEMU", "Parallels"],
+    correcta: 2,
+    explicacionBien: "Correcto. VMware ESXi es uno de los hipervisores Bare-Metal más utilizados en centros de datos.",
+    explicacionMal: "La respuesta correcta era VMware ESXi. A diferencia de VirtualBox, se instala directamente sobre el servidor físico.",
+    concepto: "ESXi es la base de muchas infraestructuras empresariales virtualizadas."
+  },
+  {
+    id: 75,
+    pregunta: "¿Qué comando de Linux usas para ejecutar un comando con permisos de superusuario?",
+    opciones: ["admin", "root", "sudo", "execute", "run"],
+    correcta: 2,
+    explicacionBien: "Correcto. sudo permite ejecutar comandos con privilegios elevados sin necesidad de iniciar sesión como root.",
+    explicacionMal: "La respuesta correcta era sudo. Es una de las herramientas de seguridad más importantes en Linux.",
+    concepto: "Ejemplo: sudo apt update"
+  },
+  {
+    id: 76,
+    pregunta: "En VMware, si quieres crear una topología compleja con VLANs, ¿qué tipo de red configuras?",
+    opciones: ["NAT", "Bridged", "Host-Only", "Custom (VMnet)", "DHCP"],
+    correcta: 3,
+    explicacionBien: "Correcto. Las redes Custom permiten construir laboratorios complejos con múltiples segmentos y VLANs.",
+    explicacionMal: "La respuesta correcta era Custom (VMnet). NAT, Bridged y Host-Only son configuraciones más simples.",
+    concepto: "VMnet es muy utilizado en laboratorios de certificaciones y simulaciones empresariales."
+  },
+  {
+    id: 77,
+    pregunta: "¿Qué es una API?",
+    opciones: ["Un cable de red", "Una Interfaz de Programación de Aplicaciones que permite que distintos sistemas se comuniquen", "Un tipo de malware", "Un protocolo de enrutamiento", "Un comando de Linux"],
+    correcta: 1,
+    explicacionBien: "Correcto. Las APIs permiten que aplicaciones diferentes intercambien información de manera controlada.",
+    explicacionMal: "La respuesta correcta era API como interfaz de comunicación entre sistemas. Casi todas las aplicaciones modernas dependen de APIs.",
+    concepto: "REST y GraphQL son tecnologías populares para construir APIs."
+  },
+  {
+    id: 78,
+    pregunta: "En Windows, ¿qué comando te muestra la configuración IP de tus tarjetas de red?",
+    opciones: ["ifconfig", "ipconfig", "show ip", "netstat", "ping"],
+    correcta: 1,
+    explicacionBien: "Correcto. ipconfig muestra información de red como dirección IP, máscara, gateway y configuración DNS.",
+    explicacionMal: "La respuesta correcta era ipconfig. Es una de las herramientas más utilizadas para diagnosticar problemas de conectividad.",
+    concepto: "ipconfig /all muestra información mucho más detallada."
+  },
+  {
+    id: 79,
+    pregunta: "¿Cuál es la principal ventaja de la 'Dockerización'?",
+    opciones: ["Requiere más hardware que las VMs", "Permite empaquetar una app con todas sus dependencias para que corra igual en cualquier entorno", "Reemplaza al Kernel de Linux", "Obliga a usar bases de datos relacionales", "Hace que las apps sean más lentas"],
+    correcta: 1,
+    explicacionBien: "Correcto. Docker facilita que una aplicación funcione exactamente igual en desarrollo, pruebas y producción.",
+    explicacionMal: "La respuesta correcta era la portabilidad. Docker reduce problemas como 'en mi computadora sí funciona'.",
+    concepto: "La consistencia entre entornos es una de las principales razones por las que Docker se volvió tan popular."
+  },
+  {
+    id: 80,
+    pregunta: "¿Qué comando de Linux usas para listar el contenido de un directorio con detalle?",
+    opciones: ["pwd", "cd", "ls -l", "mkdir", "cp"],
+    correcta: 2,
+    explicacionBien: "Correcto. ls -l muestra información detallada sobre archivos y directorios, incluyendo permisos, propietario y tamaño.",
+    explicacionMal: "La respuesta correcta era ls -l. Es uno de los comandos más utilizados para administrar sistemas Linux.",
+    concepto: "La salida de ls -l es fundamental para analizar problemas de permisos."
+  }
+];
+
+// ============================================
+// SECCIÓN 2: ESCRITURA (60 preguntas)
+// ============================================
+const preguntasEscritura = [
+  {id: 1, pregunta: "Define qué es una red de computadoras y menciona su objetivo principal.", respuesta: "Es un sistema de dispositivos interconectados que permite la comunicación y el intercambio de recursos (datos, impresoras, internet) entre ellos."},
+  {id: 2, pregunta: "Explica la diferencia entre topología física y topología lógica.", respuesta: "La física es la disposición tangible de los cables y dispositivos (lo que ves). La lógica es cómo fluyen los datos a nivel de protocolo, independientemente del cableado (lo que no ves)."},
+  {id: 3, pregunta: "¿Qué es un protocolo de comunicación y por qué es necesario?", respuesta: "Es un conjunto de reglas y formatos estandarizados que permiten que dispositivos de diferentes fabricantes se entiendan. Es necesario para garantizar la interoperabilidad."},
+  {id: 4, pregunta: "Describe la topología de estrella y menciona su principal desventaja.", respuesta: "Todos los dispositivos se conectan a un nodo central (switch/router). Su desventaja es que si el dispositivo central falla, toda la red se cae (punto único de fallo)."},
+  {id: 5, pregunta: "¿Cuál es la diferencia fundamental entre un switch y un router?", respuesta: "El switch conecta dispositivos dentro de la misma red local (LAN) usando direcciones MAC. El router conecta redes diferentes entre sí (ej. LAN con Internet) usando direcciones IP y tomando decisiones de enrutamiento."},
+  {id: 6, pregunta: "Explica qué es el direccionamiento IP privado y para qué se utiliza.", respuesta: "Son rangos de IPs reservados para uso interno en redes locales (LAN). No son enrutables en Internet y se usan para ahorrar direcciones IP públicas y añadir seguridad."},
+  {id: 7, pregunta: "¿Qué diferencia hay entre IPv4 e IPv6?", respuesta: "IPv4 usa direcciones de 32 bits (aprox. 4.3 mil millones) y IPv6 usa 128 bits (cantidad prácticamente infinita), además de mejorar la seguridad y la autoconfiguración."},
+  {id: 8, pregunta: "Define qué es el encapsulamiento en el contexto de redes.", respuesta: "Es el proceso de 'envolver' los datos del usuario con encabezados de control de cada capa del modelo OSI/TCP/IP a medida que descienden para ser transmitidos."},
+  {id: 9, pregunta: "¿Qué es una LAN, una WAN y una WLAN?", respuesta: "LAN es una red de área local (oficina/casa). WAN es una red de área amplia (conecta ciudades/países). WLAN es una red de área local inalámbrica (Wi-Fi)."},
+  {id: 10, pregunta: "Explica la diferencia entre enrutamiento estático y dinámico.", respuesta: "El estático requiere que el administrador configure las rutas manualmente. El dinámico usa protocolos (como OSPF) para que los routers aprendan y actualicen las rutas automáticamente."},
+  {id: 11, pregunta: "¿Qué función cumple un firewall en una red?", respuesta: "Actúa como una barrera de seguridad que filtra y controla el tráfico de red basándose en reglas predefinidas para bloquear accesos no autorizados o amenazas."},
+  {id: 12, pregunta: "Describe la topología de malla y en qué escenarios es útil.", respuesta: "Cada dispositivo se conecta a múltiples otros, creando redundancia. Es útil en entornos críticos (como el backbone de Internet) donde la tolerancia a fallos es obligatoria."},
+  {id: 13, pregunta: "¿Qué son los protocolos IGP y EGP? Da un ejemplo de cada uno.", respuesta: "IGP (Interior) se usa dentro de una misma empresa/red (ej. OSPF, EIGRP). EGP (Exterior) se usa para conectar diferentes sistemas autónomos en Internet (ej. BGP)."},
+  {id: 14, pregunta: "Explica la diferencia entre fibra óptica y cable de cobre.", respuesta: "La fibra óptica transmite datos con luz, es más rápida, llega más lejos y no sufre interferencia electromagnética. El cobre usa señales eléctricas, es más barato pero tiene menor alcance."},
+  {id: 15, pregunta: "¿Cuáles son las funciones principales de un administrador de redes?", respuesta: "Configurar y mantener dispositivos (routers/switches), administrar usuarios y permisos, monitorear el rendimiento, aplicar medidas de seguridad y resolver problemas (troubleshooting)."},
+  {id: 16, pregunta: "Compara el modelo OSI con el modelo TCP/IP.", respuesta: "OSI es un modelo teórico de 7 capas. TCP/IP es el modelo práctico de 4 capas en el que realmente se basa Internet."},
+  {id: 17, pregunta: "Explica la diferencia entre TCP y UDP, dando un ejemplo de uso.", respuesta: "TCP es orientado a conexión, garantiza entrega y orden (ej. Web HTTP, FTP). UDP es sin conexión, no garantiza entrega pero es más rápido (ej. Streaming, VoIP)."},
+  {id: 18, pregunta: "¿Qué función cumple la Capa de Red (Capa 3) y qué protocolos operan en ella?", respuesta: "Se encarga del direccionamiento lógico (IP) y el enrutamiento entre redes. Protocolos: IP, OSPF, BGP, ICMP."},
+  {id: 19, pregunta: "Describe el proceso de resolución de DNS y qué ocurre si falla.", respuesta: "El DNS traduce nombres de dominio a direcciones IP. Si falla, el usuario no podrá navegar usando nombres, aunque la red funcione si accede por IP directa."},
+  {id: 20, pregunta: "Explica cómo funciona el protocolo DHCP (proceso DORA).", respuesta: "El cliente envía un Discover, el servidor responde con un Offer de IP, el cliente pide la IP con un Request, y el servidor confirma con un Acknowledge."},
+  {id: 21, pregunta: "¿Qué es el protocolo STP y por qué es crucial?", respuesta: "Spanning Tree Protocol previene bucles infinitos (tormentas de broadcast) en redes con enlaces redundantes entre switches, bloqueando lógicamente los puertos sobrantes."},
+  {id: 22, pregunta: "Describe el concepto de VLAN y Trunking.", respuesta: "Una VLAN segmenta lógicamente un switch en varias redes independientes. El Trunking (802.1Q) es un enlace que transporta el tráfico de múltiples VLANs por un solo cable físico."},
+  {id: 23, pregunta: "Explica los tipos de NAT y cuándo usarías cada uno.", respuesta: "NAT Estática (1 a 1) para servidores visibles desde Internet. NAT Dinámica (pool de IPs) para empresas con muchas IPs. PAT/Sobrecarga (muchos a 1 usando puertos) para routers domésticos."},
+  {id: 24, pregunta: "¿Qué es el 'Port Forwarding' y para qué servicios es esencial?", respuesta: "Es redirigir un puerto específico de la IP pública hacia el puerto de una IP privada interna. Es esencial para que servidores internos (web, juegos) sean accesibles desde Internet."},
+  {id: 25, pregunta: "Describe la función de SMTP, POP3 e IMAP.", respuesta: "SMTP se usa para enviar correos entre servidores. POP3 e IMAP se usan para recibir/leer correos en el cliente (IMAP sincroniza, POP3 descarga y borra)."},
+  {id: 26, pregunta: "Explica qué es el protocolo ARP y en qué capa opera.", respuesta: "ARP traduce una dirección IP conocida a su dirección MAC física. Opera entre la Capa 2 y la Capa 3."},
+  {id: 27, pregunta: "¿Qué indican los códigos HTTP 404 y 500 y en qué capa se generan?", respuesta: "404 significa 'No encontrado' (el archivo no existe). 500 es 'Error interno del servidor'. Ambos son de la Capa de Aplicación (HTTP), lo que indica que la red está bien."},
+  {id: 28, pregunta: "Describe la función de SSH y por qué reemplazó a Telnet.", respuesta: "SSH permite acceso remoto cifrado (puerto 22). Reemplazó a Telnet (puerto 23) porque Telnet enviaba las contraseñas en texto plano, lo que era inseguro."},
+  {id: 29, pregunta: "Explica cómo el protocolo BGP permite la interconexión de Internet.", respuesta: "BGP es el protocolo EGP que permite a los Sistemas Autónomos (ISPs) intercambiar información de enrutamiento, actuando como el 'sistema postal' global de Internet."},
+  {id: 30, pregunta: "¿Qué es el modelo AAA y qué protocolos se usan para implementarlo?", respuesta: "AAA significa Autenticación (quién eres), Autorización (qué puedes hacer) y Auditoría (qué hiciste). Se implementa con protocolos como RADIUS o TACACS+."},
+  {id: 31, pregunta: "Explica los tres pilares de la 'Triada CIA'.", respuesta: "Confidencialidad (solo autorizados acceden), Integridad (los datos no se alteran) y Disponibilidad (los recursos están accesibles cuando se necesitan)."},
+  {id: 32, pregunta: "¿Qué es un ataque DoS/DDoS y qué principio vulnera?", respuesta: "Es saturar un sistema con tráfico falso para colapsarlo. Vulnera el principio de Disponibilidad de la Triada CIA."},
+  {id: 33, pregunta: "¿Cuál es la diferencia entre cifrado simétrico y asimétrico?", respuesta: "El simétrico usa una misma clave compartida para cifrar y descifrar (rápido, ej. AES). El asimétrico usa un par de claves (pública y privada) para intercambiar información (ej. RSA)."},
+  {id: 34, pregunta: "Explica la función de un Certificado Digital y una CA.", respuesta: "Un certificado digital valida la identidad de un servidor o persona (es como un DNI digital). La CA (Autoridad de Certificación) es la entidad de confianza que emite y firma esos certificados."},
+  {id: 35, pregunta: "¿Qué diferencia hay entre un IDS y un IPS?", respuesta: "El IDS (Detección) solo monitorea y genera alertas. El IPS (Prevención) monitorea y bloquea automáticamente el ataque en línea."},
+  {id: 36, pregunta: "Describe qué es una ACL y cómo se usa.", respuesta: "Una ACL (Lista de Control de Acceso) es un conjunto de reglas en routers/firewalls que filtran el tráfico permitiendo o denegando el paso según IP, puerto o protocolo."},
+  {id: 37, pregunta: "Explica el 'No Repudio' y qué tecnología lo garantiza.", respuesta: "Es garantizar que el autor de una acción no pueda negar haberla realizado. Se logra mediante Firmas Digitales basadas en criptografía asimétrica."},
+  {id: 38, pregunta: "¿Qué es el Principio de Menor Privilegio?", respuesta: "Es otorgar a cada usuario únicamente los permisos mínimos y estrictamente necesarios para realizar su trabajo, limitando el daño en caso de compromiso."},
+  {id: 39, pregunta: "Describe los componentes de una Política de Contraseñas robusta.", respuesta: "Mínimo 12 caracteres, complejidad, cambio cada 90 días, historial, bloqueo por intentos fallidos, implementación de MFA y almacenamiento cifrado (hash)."},
+  {id: 40, pregunta: "¿Qué es un plan BCDR y cuál es su objetivo?", respuesta: "Business Continuity and Disaster Recovery. Es el plan para garantizar que la empresa pueda seguir operando o recuperarse rápidamente tras un desastre o ciberataque."},
+  {id: 41, pregunta: "Explica la diferencia entre Política de Uso Aceptable y Control de Cambios.", respuesta: "La de Uso Aceptable define las reglas de comportamiento para los usuarios. La de Control de Cambios regula cómo el equipo de TI debe aprobar y probar modificaciones en la red."},
+  {id: 42, pregunta: "¿Qué función cumple un sistema DLP?", respuesta: "DLP (Data Loss Prevention) monitorea y bloquea la exfiltración de datos sensibles para que no salgan de la organización."},
+  {id: 43, pregunta: "Describe las fases de una Auditoría de Seguridad.", respuesta: "1) Recopilación de información (inventario), 2) Análisis de vulnerabilidades (buscar puntos débiles), 3) Evaluación de controles (verificar si las medidas funcionan)."},
+  {id: 44, pregunta: "¿Qué es el MFA y por qué es superior a la contraseña?", respuesta: "Autenticación Multifactor. Requiere dos o más pruebas de identidad (algo que sabes, algo que tienes, algo que eres). Es superior porque si roban tu contraseña, el atacante sigue necesitando tu teléfono o huella."},
+  {id: 45, pregunta: "Explica cómo un Ransomware afecta a la Triada CIA y cómo prevenirlo.", respuesta: "Afecta la Disponibilidad e Integridad al cifrar los datos. Se previene con backups offline (regla 3-2-1), sistemas actualizados, antivirus/EDR y capacitación contra phishing."},
+  {id: 46, pregunta: "Explica la diferencia entre un hipervisor Tipo 1 y uno Tipo 2.", respuesta: "El Tipo 1 (Bare-Metal) se instala directo en el hardware (ej. ESXi). El Tipo 2 (Hosted) se instala como aplicación sobre un SO anfitrión (ej. VirtualBox)."},
+  {id: 47, pregunta: "¿Cuál es la diferencia fundamental entre una VM y un Contenedor?", respuesta: "La VM virtualiza el hardware y tiene su propio Kernel (pesada). El contenedor virtualiza el SO y comparte el Kernel del host (ligero y rápido)."},
+  {id: 48, pregunta: "Describe los modos de red NAT, Bridged y Host-Only en VMware.", respuesta: "NAT: La VM sale a internet pero es invisible desde afuera. Bridged: La VM se conecta a la red física como un equipo más. Host-Only: Red aislada solo entre la VM y el Host, sin internet."},
+  {id: 49, pregunta: "¿Qué es la orquestación de contenedores (Kubernetes)?", respuesta: "Es la automatización del despliegue, escalado y gestión de miles de contenedores en producción, asegurando alta disponibilidad y recuperándose de fallos automáticamente."},
+  {id: 50, pregunta: "Explica la diferencia entre un 'proceso' y un 'servicio' en un SO.", respuesta: "Un proceso es un programa en ejecución iniciado por el usuario (ciclo finito). Un servicio es un programa que corre en segundo plano automáticamente para dar funciones al sistema (ciclo continuo)."},
+  {id: 51, pregunta: "¿Qué función cumple el Kernel y qué ocurre si falla?", respuesta: "El Kernel es el núcleo del SO que gestiona el hardware y los recursos. Si falla (Kernel Panic / Pantallazo Azul), todo el sistema se colapsa instantáneamente."},
+  {id: 52, pregunta: "Describe el propósito de ping, tracert y nslookup.", respuesta: "ping verifica conectividad básica (Capa 3). tracert muestra la ruta exacta (saltos) que toman los paquetes. nslookup consulta al DNS para resolver nombres a IPs."},
+  {id: 53, pregunta: "En Linux, ¿cómo verificarías el estado de un servicio web y sus logs?", respuesta: "Estado: sudo systemctl status apache2. Logs en tiempo real: sudo tail -f /var/log/apache2/error.log."},
+  {id: 54, pregunta: "Explica la diferencia entre chmod y chown en Linux.", respuesta: "chmod cambia los permisos de acceso (lectura/escritura/ejecución). chown cambia el propietario o grupo del archivo."},
+  {id: 55, pregunta: "¿Qué ventaja ofrece la arquitectura de microservicios frente a una monolítica?", respuesta: "Permite dividir la app en piezas independientes. Si una falla, el resto sigue funcionando, y se pueden escalar o actualizar por separado sin redeplegar todo."},
+  {id: 56, pregunta: "¿Qué es una API y para qué sirve?", respuesta: "API (Interfaz de Programación de Aplicaciones) es un conjunto de reglas que permite que distintos sistemas o aplicaciones se comuniquen e intercambien datos entre sí."},
+  {id: 57, pregunta: "Describe los tipos de mantenimiento de hardware.", respuesta: "Preventivo (limpieza para evitar fallos). Correctivo (reparar lo roto). Predictivo (usar sensores para anticipar fallos). Proactivo (mejorar el diseño para eliminar la causa raíz)."},
+  {id: 58, pregunta: "¿Qué es la virtualización de escritorio (VDI)?", respuesta: "Es centralizar y gestionar los escritorios de los usuarios en servidores virtuales, permitiendo a los usuarios acceder a su entorno de trabajo completo de forma remota y segura."},
+  {id: 59, pregunta: "Explica el concepto de 'Roaming' en redes inalámbricas.", respuesta: "Es la capacidad de un dispositivo móvil de mantener la conexión activa mientras se mueve y cambia de un Punto de Acceso a otro sin interrumpir la comunicación."},
+  {id: 60, pregunta: "¿Qué comandos usarías en Windows y Linux para ver la configuración IP?", respuesta: "En Windows: ipconfig. En Linux: ifconfig o ip a (o ip addr)."}
+];
+
+// ============================================
+// SECCIÓN 3: TROUBLESHOOTING (40 casos)
+// ============================================
+const casosTroubleshooting = [
+  {id: 1, sintoma: "Todos los empleados reportan que no pueden acceder a Internet ni a los recursos internos. Nadie puede trabajar.", evidencia: "El switch central de 48 puertos del rack está completamente apagado. Los LEDs de los puertos no encienden.", solucion: "Capa 1-2 / Switch central. Reemplazar el switch dañado. Implementar redundancia con un segundo switch y configurar STP."},
+  {id: 2, sintoma: "La conexión a Internet se cae constantemente en la planta de manufactura, especialmente cuando las máquinas pesadas están en funcionamiento.", evidencia: "ping 8.8.8.8 muestra pérdida de paquetes del 30-40%. Latencia variable. El cableado UTP Cat5e pasa junto a maquinaria industrial.", solucion: "Capa 1 / Interferencia Electromagnética (EMI). Reemplazar UTP por fibra óptica o usar cable STP blindado."},
+  {id: 3, sintoma: "La red está insoportablemente lenta. Las páginas web tardan minutos en cargar.", evidencia: "Logs del switch: 'Broadcast Storm detected' y 'Excessive collisions'. LEDs parpadean frenéticamente. Alguien conectó ambos extremos de un cable al mismo switch.", solucion: "Capa 2 / Bucle de Capa 2. Desconectar el cable que crea el bucle. Habilitar STP en todos los switches."},
+  {id: 4, sintoma: "El departamento de Contabilidad se mudó a una nueva subred (192.168.50.0/24), pero nadie desde otras áreas puede acceder a sus recursos.", evidencia: "tracert se queda estancado en el router principal. La tabla de enrutamiento no muestra la ruta hacia 192.168.50.0/24.", solucion: "Capa 3 / Enrutamiento Estático. Agregar ruta estática o habilitar OSPF para anunciar la nueva subred."},
+  {id: 5, sintoma: "Se instaló un servidor nuevo con IPv6-only, pero los equipos legacy (solo IPv4) no pueden conectarse a él.", evidencia: "ping6 funciona desde PC moderna. ping IPv4 falla porque el servidor no tiene interfaz IPv4.", solucion: "Capa 3 / IPv4 vs IPv6. Configurar Dual-Stack en el servidor (ambas direcciones IP)."},
+  {id: 6, sintoma: "Un usuario de Ventas tiene link en el puerto pero no puede acceder a recursos de su VLAN (VLAN 20). Obtuvo IP APIPA 169.254.x.x.", evidencia: "El puerto del switch está configurado como acceso para VLAN 10. El trunk no permite la VLAN 20.", solucion: "Capa 2 / VLAN Trunking. Configurar puerto: switchport access vlan 20. Agregar VLAN 20 al trunk."},
+  {id: 7, sintoma: "El Wi-Fi funciona terriblemente lento los lunes por la mañana, pero los fines de semana va perfectamente.", evidencia: "Analizador muestra 15 redes vecinas operando en el canal 6 (2.4GHz). La red de la empresa también está en canal 6.", solucion: "Capa 1 / Interferencia de Canal Wi-Fi. Cambiar a canal 1, 6 u 11, o migrar a banda 5GHz."},
+  {id: 8, sintoma: "Se cortó el enlace principal entre dos routers, pero el tráfico no se redirigió automáticamente al enlace de respaldo.", evidencia: "show ip route muestra que la ruta sigue apuntando al enlace caído. OSPF no forma adyacencia por el enlace de respaldo.", solucion: "Capa 3 / Protocolo de Enrutamiento. Verificar configuración OSPF, Router IDs, reiniciar proceso OSPF."},
+  {id: 9, sintoma: "El sistema de detección reporta actividad anómala masiva. Varios servidores están siendo cifrados rápidamente.", evidencia: "Logs del firewall perimetral NO muestran alerta de intrusión externa. Logs SMB muestran accesos masivos desde una PC interna.", solucion: "Capa 4-7 / Tráfico Este-Oeste. Implementar firewalls internos y microsegmentación. Desconectar equipos afectados. Restaurar desde backups."},
+  {id: 10, sintoma: "Las PCs tienen IP correcta pero no pueden navegar por Internet.", evidencia: "ipconfig muestra IP 192.168.1.50, Máscara OK, pero Gateway en blanco. ping 8.8.8.8 falla.", solucion: "Capa 3 / Gateway por defecto. Configurar el gateway correctamente en DHCP o manualmente. Verificar conexión al puerto WAN."},
+  {id: 11, sintoma: "Un empleado intenta acceder a intranet.empresa.com pero el navegador muestra ERR_NAME_NOT_RESOLVED. Por IP (192.168.10.50) carga perfecto.", evidencia: "ping intranet.empresa.com falla. ping 192.168.10.50 responde. nslookup devuelve Non-existent domain.", solucion: "Capa 7 / DNS. Ejecutar ipconfig /flushdns. Verificar registro Tipo A en el servidor DNS."},
+  {id: 12, sintoma: "Al abrir el sitio web corporativo, el texto se muestra pero todas las imágenes aparecen como íconos rotos.", evidencia: "Consola del navegador (F12) muestra errores 404 Not Found para archivos /images/logo.png, /images/banner.jpg.", solucion: "Capa 7 / HTTP. Verificar rutas en HTML (mayúsculas/minúsculas en Linux). Verificar que archivos existan. Revisar permisos del usuario www-data."},
+  {id: 13, sintoma: "Los usuarios pueden conectarse al FTP y navegar carpetas, pero al subir archivos grandes (>100MB), la transferencia se interrumpe.", evidencia: "Cliente FTP muestra 'Connection reset by peer'. Archivos pequeños funcionan. Puerto 21 responde. Hay firewall/NAT en el medio.", solucion: "Capa 4-7 / FTP Modo Pasivo. Configurar cliente FTP en Modo Pasivo (PASV). Configurar rango fijo de puertos en el servidor y abrirlos en el firewall."},
+  {id: 14, sintoma: "Los empleados pueden recibir correos pero no pueden enviar. El cliente muestra 'Relay access denied'.", evidencia: "Servidor SMTP responde en puerto 25. Logs muestran 'Client host rejected'. Configuración del cliente sin autenticación.", solucion: "Capa 7 / SMTP. Habilitar autenticación SMTP en el cliente de correo (usuario y contraseña)."},
+  {id: 15, sintoma: "El servidor web interno funciona para empleados, pero clientes desde Internet no pueden acceder al sitio.", evidencia: "Desde PC interna http://192.168.1.100 carga. Desde celular con datos móviles http://200.10.10.5 da timeout. No hay reglas de Port Forwarding.", solucion: "Capa 3 / NAT Estática. Configurar Port Forwarding: ip nat inside source static tcp 192.168.1.100 80 200.10.10.5 80."},
+  {id: 16, sintoma: "Todos los días a las 10:00 AM, cuando toda la empresa se conecta, Internet se vuelve extremadamente lento o se cae.", evidencia: "Router muestra CPU al 100%. show ip nat translations muestra más de 60,000 entradas (tabla desbordada). Router usa PAT con una sola IP pública.", solucion: "Capa 3-4 / PAT. Agregar más IPs públicas al pool de NAT. Implementar balanceo de carga con múltiples ISPs."},
+  {id: 17, sintoma: "Durante videollamadas de Zoom, el video se congela y el audio se corta. Los mensajes de WhatsApp funcionan perfectamente.", evidencia: "ping muestra latencia estable 20ms. Analizador muestra alto jitter y pérdida de paquetes 5-10%. Zoom usa UDP, WhatsApp usa TCP.", solucion: "Capa 4 / UDP vs TCP / QoS. Implementar QoS en el router para priorizar tráfico de videoconferencia."},
+  {id: 18, sintoma: "Un técnico conectó un cable extra entre dos switches para redundancia. Inmediatamente toda la red colapsó.", evidencia: "LEDs parpadean frenéticamente. show spanning-tree muestra STP deshabilitado. Analizador muestra millones de frames de broadcast/segundo.", solucion: "Capa 2 / Bucle STP. Habilitar STP inmediatamente: spanning-tree mode rapid-pvst. STP bloqueará lógicamente el enlace redundante."},
+  {id: 19, sintoma: "Dos switches conectados, pero PCs de VLAN 10 en un switch no pueden comunicarse con PCs de VLAN 10 en el otro.", evidencia: "show interfaces trunk en Switch A: Allowed VLANs 1,20,30. En Switch B: Allowed VLANs 1,10,20,30. VLAN 10 no permitida en Switch A.", solucion: "Capa 2 / 802.1Q Trunking. Agregar VLAN 10 al trunk del Switch A: switchport trunk allowed vlan add 10."},
+  {id: 20, sintoma: "Un usuario no puede acceder a Internet. Su PC tiene IP válida (192.168.1.50) pero no puede hacer ping al gateway (192.168.1.1).", evidencia: "ping a sí mismo responde. ping al gateway falla. arp -a muestra MAC 00-50-56-C0-00-08 para el gateway, pero la MAC real del router es 00-1A-2B-3C-4D-5E.", solucion: "Capa 2-3 / ARP. Limpiar caché ARP: arp -d *. Buscar dispositivo con MAC conflictiva. Verificar IP duplicada."},
+  {id: 21, sintoma: "Los usuarios reportan que no pueden abrir documentos. Todos los archivos tienen extensión .locked y aparece nota pidiendo Bitcoin.", evidencia: "Logs SMB muestran accesos masivos anómalos desde PC interna a las 3:00 AM. Firewall perimetral sin alertas. Archivo decrypt_instructions.txt en cada carpeta.", solucion: "Capa 7 / Ransomware. Desconectar equipos afectados INMEDIATAMENTE. No pagar rescate. Restaurar desde backups offline. Investigar vector de entrada (phishing)."},
+  {id: 22, sintoma: "Un empleado intenta enviar 'clientes_2026.csv' por correo pero el sistema lo bloquea automáticamente.", evidencia: "Log del firewall: 'DLP Policy Triggered - PII Detected - Action: Block'. El archivo contiene 5,000 registros con datos personales.", solucion: "Capa 7 / DLP. El DLP funcionó correctamente. Investigar al empleado: ¿trabajo remoto legítimo o exfiltración? Capacitar sobre métodos seguros (VPN)."},
+  {id: 23, sintoma: "El IDS generó alertas sobre escaneo de puertos, pero el atacante logró entrar a la red de todos modos.", evidencia: "Logs del IDS: 'Alert: Port scan detected - Action: Log only'. No hay logs de 'Connection dropped'. Horas después, acceso no autorizado a servidor crítico.", solucion: "Capa 3-7 / IDS vs IPS. Cambiar de IDS a IPS, o configurar IDS en modo Inline/Block para que bloquee automáticamente."},
+  {id: 24, sintoma: "Después de actualizar reglas del firewall, nadie puede acceder al sitio web corporativo, aunque el servidor web funciona.", evidencia: "Reglas del firewall: 1. deny ip any any / 2. permit tcp any any eq 80 / 3. permit tcp any any eq 443. ping funciona, http/https timeout.", solucion: "Capa 3-4 / ACL. Reordenar reglas: las específicas (permit 80/443) deben ir ANTES de deny ip any any. Las ACL se leen de arriba hacia abajo."},
+  {id: 25, sintoma: "Los usuarios reportan que el navegador muestra 'Conexión no privada' al entrar al banco online.", evidencia: "Detalle del certificado: 'Not After: [Fecha de ayer]'. El certificado expiró.", solucion: "Capa 6-7 / SSL/TLS. Renovar y reinstalar el certificado digital con la CA (Autoridad de Certificación)."},
+  {id: 26, sintoma: "Un administrador no puede entrar a su cuenta, dice 'Cuenta bloqueada'.", evidencia: "Logs AD: 50 intentos fallidos de login en 1 minuto desde IP extranjera.", solucion: "Capa 7 / Fuerza Bruta. Desbloquear cuenta en AD. Bloquear IP origen en Firewall perimetral. Investigar si hubo compromiso de credenciales."},
+  {id: 27, sintoma: "La web está caída y el enlace de Internet está saturado al 100%.", evidencia: "Captura de paquetes: Millones de TCP SYN sin el ACK final (Half-open connections).", solucion: "Capa 3-4 / DDoS SYN Flood. Activar Anti-spoofing, Rate-limiting o contratar mitigación DDoS en la nube."},
+  {id: 28, sintoma: "Alguien entró a una cuenta corporativa desde Rusia, pero el usuario tiene MFA activado.", evidencia: "Log: Login exitoso. Usuario confirmó 'Sí' en la app del celular (MFA Fatigue).", solucion: "Capa 7 / Phishing / MFA Fatigue. Revocar sesión, resetear credenciales, re-entrenar al usuario sobre ingeniería social."},
+  {id: 29, sintoma: "Hackearon un servidor Linux, pero no hay rastro en los logs.", evidencia: "/var/log/auth.log está vacío o truncado. El atacante borró los logs locales.", solucion: "Capa 7 / Auditoría. Centralizar logs en un servidor Syslog remoto (WORM) para que no puedan ser borrados localmente."},
+  {id: 30, sintoma: "Un pasante de TI borró por error la carpeta de 'Nómina de Directivos'.", evidencia: "El usuario es miembro del grupo 'Domain Admins' por herencia de un grupo antiguo.", solucion: "Capa 7 / Menor Privilegio. Quitar del grupo Admin. Auditar y aplicar permisos NTFS/Linux estrictos. Principio de menor privilegio."},
+  {id: 31, sintoma: "Una VM tiene internet, pero la PC física (Host) no puede hacerle ping a la IP de la VM.", evidencia: "La VM está configurada en modo NAT en VMware.", solucion: "Capa 3 / VMware NAT. NAT oculta la VM. Cambiar a Host-Only o configurar Port Forwarding en VMware."},
+  {id: 32, sintoma: "Pusiste una VM en modo Bridged, pero no obtiene IP de la red corporativa.", evidencia: "Switch físico: Log 'Port Security violation / MAC limit exceeded'.", solucion: "Capa 2 / Port Security. El switch bloquea MACs desconocidas. Registrar la MAC de la VM en el switch físico."},
+  {id: 33, sintoma: "Una VM de pruebas en modo Host-Only no puede descargar actualizaciones de Windows Update.", evidencia: "ipconfig no muestra Default Gateway.", solucion: "Capa 3 / VMware Host-Only. Host-Only es aislado. Agregar una segunda NIC a la VM en modo NAT para salida a internet."},
+  {id: 34, sintoma: "Un contenedor Docker corre la aplicación web, pero localhost:80 desde el Host da error.", evidencia: "docker ps muestra: 80/tcp (sin mapeo al host).", solucion: "Capa 4-7 / Docker Ports. Faltó mapear el puerto. Ejecutar: docker run -p 80:80 mi_imagen."},
+  {id: 35, sintoma: "La página web en Linux no abre, da 'Connection Refused'.", evidencia: "sudo systemctl status apache2 muestra: inactive (dead).", solucion: "Capa 7 / Systemd. El servicio se cayó. Ejecutar: sudo systemctl restart apache2."},
+  {id: 36, sintoma: "La web carga, pero al entrar a /admin da '403 Forbidden'.", evidencia: "ls -l muestra que el dueño es root y permisos 700.", solucion: "Capa 7 / chmod / chown. El usuario web no tiene permisos. Ejecutar: chown www-data carpeta y chmod 755 carpeta."},
+  {id: 37, sintoma: "Las PCs no pueden unirse al Dominio: 'No hay servidores de inicio de sesión disponibles'.", evidencia: "nslookup -type=SRV _ldap._tcp.dc._msdcs... falla.", solucion: "Capa 7 / AD DNS. Fallan los registros SRV. Reiniciar servicio Netlogon en el Controlador de Dominio."},
+  {id: 38, sintoma: "tracert a Google muere en el salto 3, pero Chrome carga perfectamente.", evidencia: "El router del salto 3 responde 'Request Timed Out' en tracert.", solucion: "Capa 3 / ICMP vs TCP. Falso positivo. El router bloquea ICMP (tracert), pero deja pasar TCP 443 (Chrome). La red funciona bien."},
+  {id: 39, sintoma: "Las VMs en VirtualBox van lentísimas comparadas con el servidor ESXi.", evidencia: "Administrador de Tareas de Windows muestra alto uso de CPU del SO anfitrión.", solucion: "Hardware / Hipervisor Tipo 2. El SO Host consume recursos. Migrar a Hipervisor Tipo 1 (ESXi/Proxmox)."},
+  {id: 40, sintoma: "Un Pod de Kubernetes se reinicia solo cada 10 minutos exactos.", evidencia: "kubectl describe pod muestra Reason: OOMKilled.", solucion: "App / K8s Resources. Se quedó sin RAM. Aumentar limits.memory en el manifiesto YAML del Pod."}
+];
